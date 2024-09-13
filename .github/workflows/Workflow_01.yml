@@ -10,15 +10,3 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v1
-      - name: setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '13.x'
-      - name: Generate README file
-        run: node index.js
-        env:
-          OPEN_WEATHER_MAP_KEY: ${{secrets.OPEN_WEATHER_MAP_KEY}}
-      - name: Push new README.md
-        uses: mikeal/publish-to-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
