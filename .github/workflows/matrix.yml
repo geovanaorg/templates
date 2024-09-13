@@ -1,0 +1,29 @@
+name: Matrix Builds
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: [project1, project2] # Define os builds para os projetos 1 e 2
+        
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Build ${{ matrix.project }}
+        run: echo "Building ${{ matrix.project }}"
+        
+      - name: Generate Artifact
+        run: echo "This is the artifact for ${{ matrix.project }}" > ${{ matrix.project }}_artifact.txt
+        
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.project }}_artifact
+          path: ${{ matrix.project }}_artifact.txt
